@@ -73,7 +73,7 @@ class ApplyTicketTracker extends React.Component {
                           
                     
                             
-                            "variants": {
+                            "variants": { //For some reason this doesn't work.
                            
                             
                               "metafields": {
