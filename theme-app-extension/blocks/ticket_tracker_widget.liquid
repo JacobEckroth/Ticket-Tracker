@@ -1,0 +1,89 @@
+{{ 'ticket_tracker.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'ticket_tracker.js' | asset_url }}" defer></script>
+
+{%- liquid 
+if block.settings.tickets_sold_20
+  assign tickets_sold_20 = block.settings.tickets_sold_20 | times: 20
+else if section.settings.tickets_sold_20
+  assign tickets_sold_20 = section.settings.tickets_sold_20 | times: 20
+else:
+  assign tickets_sold_20 = 0
+endif
+
+if block.settings.tickets_sold_125
+  assign tickets_sold_125 = block.settings.tickets_sold_125 | times: 125
+else if section.settings.tickets_sold_125
+  assign tickets_sold_125 = section.settings.tickets_sold_125 | times: 125
+else:
+  assign tickets_sold_125 = 0
+endif
+
+if block.settings.tickets_sold_500
+  assign tickets_sold_500 = block.settings.tickets_sold_500 | times: 500
+else if section.settings.tickets_sold_500
+  assign tickets_sold_500 = section.settings.tickets_sold_500 | times: 500
+else:
+  assign tickets_sold_500 = 0
+endif
+
+if block.settings.tickets_sold_1200
+  assign tickets_sold_1200 = block.settings.tickets_sold_1200 | times: 1200
+else if section.settings.tickets_sold_1200
+  assign tickets_sold_1200 = section.settings.tickets_sold_1200 | times: 1200
+else:
+  assign tickets_sold_1200 = 0
+endif
+
+if block.settings.tickets_sold_2000
+  assign tickets_sold_2000 = block.settings.tickets_sold_2000 | times: 2000
+else if section.settings.tickets_sold_2000
+  assign tickets_sold_2000 = section.settings.tickets_sold_2000 | times: 2000
+else:
+  assign tickets_sold_2000 = 0
+endif
+-%}
+
+<div class="tickets_sold_section">
+  Tickets Sold: 
+  
+  <div class="total_votes_holder">
+    {{ tickets_sold_20 | plus: tickets_sold_125 | plus: tickets_sold_500 | plus: tickets_sold_1200 | plus:
+      tickets_sold_2000 }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name":"ticket_tracker",
+  "target":"section",
+  "settings":[
+     {
+        "type":"text",
+        "id":"tickets_sold_20",
+        "label":"Countup 20 tickets amount"
+     },
+     {
+        "type":"text",
+        "id":"tickets_sold_125",
+        "label":"Countup 125 tickets amount"
+     },
+     {
+        "type":"text",
+        "id":"tickets_sold_500",
+        "label":"Countup 500 tickets amount"
+     },
+     {
+        "type":"text",
+        "id":"tickets_sold_1200",
+        "label":"Countup 1200 tickets amount"
+     },
+     {
+        "type":"text",
+        "id":"tickets_sold_2000",
+        "label":"Countup 2000 tickets amount"
+     }
+  ]
+}
+{% endschema %}
+
